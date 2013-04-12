@@ -33,6 +33,9 @@ namespace GrandCru.Util.Tests
 				Assert.GreaterOrEqual(Profiler.Duration(), 200);
 			}
 
+			// Will fetch the duration of first using ()
+			Assert.GreaterOrEqual(Profiler.Duration(), 200);
+
 			var data = Profiler.GetData();
 
 			Assert.AreEqual(2, data.Count);
