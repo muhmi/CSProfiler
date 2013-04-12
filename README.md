@@ -32,3 +32,11 @@ Will print something like:
 	
 
 Obviously this is not a replacement for a _real profiler_ but something that you can run in production servers without causing too much overhead.
+
+Check out stuff like https://github.com/etsy/statsd/ for gathering timing information.
+
+## License
+
+Do what the hell you want.
+
+© Roope Kangas / Grand Cru / http://grandcrugames.com.
