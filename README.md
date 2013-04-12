@@ -10,6 +10,8 @@ Simple _thread specific_ profiling information for C# using() statements:
 			Thread.Sleep(TimeSpan.FromMilliseconds(100));
 		}
 	}
+	
+	var total = Profiler.Duration();
 
 Later in the same thread you can fetch timing information:
 	
