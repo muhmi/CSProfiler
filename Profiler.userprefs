@@ -1,16 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Profiler/Profiler.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Profiler/ProfileTest.cs">
     <Files>
+      <File FileName="Profiler/Profiler.cs" Line="75" Column="21" />
       <File FileName="Profiler/Program.cs" Line="16" Column="21" />
-      <File FileName="Profiler/ProfileTest.cs" Line="6" Column="11" />
-      <File FileName="Profiler/Profiler.cs" Line="5" Column="1" />
+      <File FileName="Profiler/ProfileTest.cs" Line="28" Column="20" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Profiler" expanded="True">
-            <Node name="Profiler.cs" selected="True" />
+            <Node name="ProfileTest.cs" selected="True" />
           </Node>
         </State>
       </Pad>
