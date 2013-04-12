@@ -30,6 +30,7 @@ namespace GrandCru.Util.Tests
 				using (Profiler.Track("Other")) {
 					Thread.Sleep(TimeSpan.FromMilliseconds(100));
 				}
+				Assert.GreaterOrEqual(Profiler.Duration(), 200);
 			}
 
 			var data = Profiler.GetData();
@@ -43,8 +44,8 @@ namespace GrandCru.Util.Tests
 
 			Assert.AreEqual(1, data[0].callCount);
 
-			Assert.GreaterOrEqual(200, data[0].callCount);
-			Assert.GreaterOrEqual(100, data[1].callCount);
+			Assert.GreaterOrEqual(data[0].totalMs, 200);
+			Assert.GreaterOrEqual(data[1].totalMs, 100);
 		}
 
 		[Test()]

@@ -9,7 +9,10 @@ namespace GrandCru.Util
 		
 		[ThreadStatic]
 		private static Tracker trackerObj;
-		
+
+		/// <summary>
+		/// Resets the profiler
+		/// </summary>
 		public static void StartNewFrame()
 		{
 			if (trackerObj == null) {
@@ -17,7 +20,11 @@ namespace GrandCru.Util
 			}
 			trackerObj.StartNewFrame();
 		}
-		
+
+		/// <summary>
+		/// Flattens profile data, mainly for debug output or dumping to database.
+		/// </summary>
+		/// <returns>List of </returns>
 		public static List<FlatProfileDataItem> GetData()
 		{
 			if (trackerObj != null) {
@@ -26,11 +33,26 @@ namespace GrandCru.Util
 				return new List<FlatProfileDataItem>();
 			}
 		}
-		
+
+		/// <summary>
+		/// Track a block of code.
+		/// </summary>
+		/// <param name="key">Unique name for the code block</param>
 		public static IDisposable Track(string key)
 		{
 			if (trackerObj == null) StartNewFrame();
 			return trackerObj.Track(key);
+		}
+
+		/// <summary>
+		/// Total milliseconds spent inside this code block
+		/// </summary>
+		public static long Duration()
+		{
+			if (trackerObj != null) {
+				return trackerObj.CurrentDuration();
+			}
+			return 0;
 		}
 		
 		class Tracker : IDisposable {
@@ -61,6 +83,15 @@ namespace GrandCru.Util
 				child.Enter();
 				stack.Push(child);
 				return this;
+			}
+
+			public long CurrentDuration()
+			{
+				if (stack.Count > 0) {
+					var current = stack.Peek();
+					return current.Duration();
+				}
+				return 0;
 			}
 			
 			public void Dispose()
@@ -116,6 +147,14 @@ namespace GrandCru.Util
 					}
 				}
 				return null;
+			}
+
+			public long Duration()
+			{
+				if (totalMs == 0) {
+					return (Environment.TickCount & Int32.MaxValue) - startms;
+				}
+				return totalMs;
 			}
 			
 			public void Enter()
