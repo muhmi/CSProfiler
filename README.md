@@ -39,6 +39,10 @@ Check out stuff like https://github.com/etsy/statsd/ for gathering timing inform
 
 The repository contains a solution file Profiler.sln and a NAnt build script. The NAnt script will generate CSProfiler.dll to Profiler/bin folder.
 
+## Contact
+
+Twitter https://twitter.com/roopekangas. Email works too: firstname at grandcrugames.com.
+
 ## License
 
 Copyright 2013 Roope Kangas / Grand Cru Games
