@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<project name="CSProfiler" default="build" basedir=".">
+
+	<description>CSProfiler</description>
+
+	<target name="clean">
+		<delete dir="Profiler/bin" if="${directory::exists('Profiler/bin')}"/>
+		<delete dir="Profiler/test-results" if="${directory::exists('Profiler/test-results')}"/>
+	</target>
+
+	<target name="init">
+		<mkdir dir="Profiler/bin" unless="${directory::exists('bin')}"/>
+	</target>
+
+	<target name="build" depends="init">
+
+		<csc target="library" output="Profiler/bin/CSProfiler.dll" define="SERVER" debug="true">
+			<sources>
+				<include name="Profiler/Profiler.cs"/>
+			</sources>
+		</csc>
+
+	</target>
+
+</project>
