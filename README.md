@@ -37,7 +37,7 @@ Check out stuff like https://github.com/etsy/statsd/ for gathering timing inform
 
 ## Building
 
-There is a Visual Studio solution and a NAnt build script. The NAnt script will generate CSProfiler.dll to Profiler/bin folder.
+The repository contains a solution file Profiler.sln and a NAnt build script. The NAnt script will generate CSProfiler.dll to Profiler/bin folder.
 
 ## License
 
