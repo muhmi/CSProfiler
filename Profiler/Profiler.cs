@@ -54,10 +54,24 @@ namespace GrandCru.Util
 			}
 			return 0;
 		}
+
+		/// <summary>
+		/// Duration of last tracked block.
+		/// </summary>
+		/// <returns>The duration.</returns>
+		public static long LastDuration()
+		{
+			if (trackerObj != null) {
+				return trackerObj.LastDuration();
+			}
+			return 0;
+		}
 		
 		class Tracker : IDisposable {
 			
 			private readonly Stack<ProfilerDataNode> stack = new Stack<ProfilerDataNode>();
+
+			private long lastDuration = 0;
 			
 			public Tracker()
 			{
@@ -93,11 +107,17 @@ namespace GrandCru.Util
 				}
 				return 0;
 			}
+
+			public long LastDuration()
+			{
+				return lastDuration;
+			}
 			
 			public void Dispose()
 			{
 				var root = stack.Pop();
 				root.Leave();
+				lastDuration = root.Duration();
 			}
 		}
 		
@@ -105,6 +125,7 @@ namespace GrandCru.Util
 		{
 			public string key;
 			public int totalMs;
+			public int maxMs;
 			public int callCount;
 		}
 		
@@ -113,6 +134,7 @@ namespace GrandCru.Util
 			
 			public string key;
 			public int totalMs;
+			public int maxMs;
 			public int callCount;
 			
 			private List<ProfilerDataNode> children;
@@ -165,7 +187,9 @@ namespace GrandCru.Util
 			
 			public void Leave()
 			{
-				totalMs += (Environment.TickCount & Int32.MaxValue) - startms;
+				var duration = (Environment.TickCount & Int32.MaxValue) - startms;
+				totalMs += duration;
+				if (duration > maxMs) maxMs = duration;
 			}
 			
 			public void Reset()
@@ -173,6 +197,7 @@ namespace GrandCru.Util
 				totalMs = 0;
 				callCount = 0;
 				startms = 0;
+				maxMs = 0;
 				if (children != null) foreach (var child in children) child.Reset();
 			}
 			
@@ -189,6 +214,7 @@ namespace GrandCru.Util
 					myitem.key = myPath;
 					myitem.callCount = callCount;
 					myitem.totalMs = totalMs;
+					myitem.maxMs = maxMs;
 					list.Add(myitem);
 				}
 				
